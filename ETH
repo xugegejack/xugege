@@ -1,0 +1,9 @@
+// 导入以太坊的 ERC-20 接口
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+
+// 指定合约的名称、符号和小数点位数
+contract MyToken is ERC20 {
+    constructor() ERC20("MyToken", "MTK") {
+        // 设置初始代币总量（以wei为单位）
+        _mint(msg.sender, 1000000 * (10**uint256(decimals())));
+    }
