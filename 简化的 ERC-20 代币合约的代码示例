@@ -1,0 +1,21 @@
+// 导入以太坊的 ERC-20 接口
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+// 代币合约
+contract MyToken is ERC20, Ownable {
+    // 构造函数
+    constructor(string memory _name, string memory _symbol, uint256 _initialSupply) ERC20(_name, _symbol) {
+        _mint(msg.sender, _initialSupply);
+    }
+
+    // 铸币函数，只有合约所有者有权限
+    function mint(address account, uint256 amount) public onlyOwner {
+        _mint(account, amount);
+    }
+
+    // 燃烧函数，只有合约所有者有权限
+    function burn(address account, uint256 amount) public onlyOwner {
+        _burn(account, amount);
+    }
+}
